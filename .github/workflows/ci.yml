@@ -39,10 +39,6 @@ jobs:
               prerelease: true
             }, 
             {
-              name: 'feature/CI', 
-              prerelease: true
-            }, 
-            {
               name: 'main', 
               prerelease: false
             }

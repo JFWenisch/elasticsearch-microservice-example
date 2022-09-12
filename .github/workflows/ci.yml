@@ -28,6 +28,9 @@ jobs:
       uses: cycjimmy/semantic-release-action@v3
       with:
         semantic_version: 16
+        extra_plugins: |
+            @semantic-release/git
+            @semantic-release/changelog 
         # you can set branches for semantic-release above v16.
         branches: |    
           [

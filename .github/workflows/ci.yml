@@ -25,7 +25,9 @@ jobs:
     - name: Build with Maven
       run: cd flight-status-backend && mvn -B package --file pom.xml
     - name: Semantic Release
-      uses: hennejg/github-tag-action@v4.1.jh1
+      uses: anothrNick/github-tag-action@1.40.0
       with:
-        github_token: ${{ secrets.GITHUBTOKEN }}
-        release_branches: main
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        WITH_V: true
+        RELEASE_BRANCHES: main
+        VERBOSE: true

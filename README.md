@@ -28,7 +28,7 @@ docker-compose down -v
 
 ### Search for flight status
 The microsoervice provides and endpoint that requires a json containing the flightnumber and traveldate(`yyyy-MM-dd format`) as string.
-```JSON
+```bash
 curl --location --request POST 'localhost:8090' \
 --header 'Content-Type: application/json' \
 --data-raw '{ "flightNumber": "F12345", "travelDate": "2022-08-17" }'

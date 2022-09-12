@@ -25,26 +25,7 @@ jobs:
     - name: Build with Maven
       run: cd flight-status-backend && mvn -B package --file pom.xml
     - name: Semantic Release
-      uses: cycjimmy/semantic-release-action@v3
+      uses: hennejg/github-tag-action@v4.1.jh1
       with:
-        semantic_version: 16
-        extra_plugins: |
-            @semantic-release/git
-            @semantic-release/changelog 
-        # you can set branches for semantic-release above v16.
-        branches: |    
-          [
-            '+([0-9])?(.{+([0-9]),x}).x',
-            'master', 
-            'main', 
-            {
-              name: 'develop', 
-              prerelease: true
-            }, 
-            {
-              name: 'main', 
-              prerelease: false
-            }
-          ]
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        github_token: ${{ secrets.GITHUBTOKEN }}
+        release_branches: main

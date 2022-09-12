@@ -20,7 +20,8 @@ import tech.wenisch.flightstatus.FlightStatusManager;
 public class Controller {
 
 	@Operation(summary = "Returns HTTP Status 200 if the service up and running")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Service is up and running", content = @Content) })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Service is up and running", content = @Content) })
 	@GetMapping(path = "/health")
 	/**
 	 * 
@@ -36,7 +37,7 @@ public class Controller {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Related flights found", content = {
 			@Content(mediaType = "application/json", schema = @Schema(implementation = FlightStatusResponse.class)) }),
 			@ApiResponse(responseCode = "400", description = "Invalid input (i.e. flightumber)", content = @Content),
-			@ApiResponse(responseCode = "404", description = "No flights found", content = @Content) })
+			@ApiResponse(responseCode = "204", description = "No flights found", content = @Content) })
 	@PostMapping(path = "/")
 	/**
 	 * 
@@ -45,7 +46,13 @@ public class Controller {
 	 * @throws Exception
 	 */
 	public ResponseEntity<FlightStatusResponse> process(@RequestBody FlightStatusRequest request) throws Exception {
-		FlightStatusResponse response = FlightStatusManager.findFlight(request);
+		FlightStatusResponse response = FlightStatusManager.getInstance().findFlight(request);
+		if (response == null) {
+			return new ResponseEntity<FlightStatusResponse>(response, HttpStatus.BAD_REQUEST);
+
+		} else if (response.getFlights() == null) {
+			return new ResponseEntity<FlightStatusResponse>(response, HttpStatus.NO_CONTENT);
+		}
 		return new ResponseEntity<FlightStatusResponse>(response, HttpStatus.OK);
 
 	}

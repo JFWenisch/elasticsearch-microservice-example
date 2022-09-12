@@ -24,3 +24,28 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: cd flight-status-backend && mvn -B package --file pom.xml
+    - name: Semantic Release
+      uses: cycjimmy/semantic-release-action@v3
+      with:
+        semantic_version: 16
+        # you can set branches for semantic-release above v16.
+        branches: |    
+          [
+            '+([0-9])?(.{+([0-9]),x}).x',
+            'master', 
+            'main', 
+            {
+              name: 'develop', 
+              prerelease: true
+            }, 
+            {
+              name: 'feature/CI', 
+              prerelease: true
+            }, 
+            {
+              name: 'main', 
+              prerelease: false
+            }
+          ]
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}

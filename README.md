@@ -40,8 +40,8 @@ The endpoint returns an array of flights that matches the input.
 {
   "flight": [
     {
-      "departureTime": "2022-08-17",
-      "arrivalTime": "2022-08-17",
+      "departureTime": "2022-08-17 18:17:00",
+      "arrivalTime": "2022-08-17 21:15:22",
       "derpartureAirport": {
         "fullName": "Cologne Bonn Airport",
         "shortName": "CGN"

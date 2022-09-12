@@ -6,14 +6,14 @@ import tech.wenisch.flightstatus.models.Flight;
 
 public class FlightStatusResponse {
 
-	List<Flight> flight;
+	List<Flight> flights;
 
-	public List<Flight> getFlight() {
-		return flight;
+	public List<Flight> getFlights() {
+		return flights;
 	}
 
-	public void setFlight(List<Flight> flight) {
-		this.flight = flight;
+	public void setFlights(List<Flight> flight) {
+		this.flights = flight;
 	}
 
 

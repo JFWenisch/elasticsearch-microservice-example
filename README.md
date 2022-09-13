@@ -1,16 +1,17 @@
 # Flightstatus Example
 ![Build](https://github.com/JFWenisch/flight-status-example/actions/workflows/ci.yml/badge.svg)
-
+![image info](./docs/img/flight-status-frontend.png)
 
 The Flightstatus example is an application containing a lightweight java spring-boot microservice, elasticsearch and kibana to demonstrate a possible integration.
 
 ```mermaid
 stateDiagram-v2
- [*] --> RESTClient
- RESTClient --> backend: flightStatusRequest
- backend --> elasticsearch: flightStatusRequest
+ [*] --> Frontend
+Frontend --> Backend: flightStatusRequest
+Backend --> Elasticsearch: flightStatusRequest
+Backend --> Frontend: flightStatusResponse
  [*] --> Kibana 
- Kibana --> elasticsearch
+ Kibana --> Elasticsearch
  
 ```
 ## Quickstart

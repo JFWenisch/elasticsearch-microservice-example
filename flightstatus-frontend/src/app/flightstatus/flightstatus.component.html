@@ -1,0 +1,49 @@
+<div style="padding:20px;margin:20px;width:100%;background:transparent;border:none">
+    <mat-card class="example-card" style="border:none;box-shadow:none;background:transparent;">
+       <mat-card-title>FlightStatus</mat-card-title>
+       <mat-card-subtitle>Input the details to search for your flights</mat-card-subtitle>
+       
+        <mat-card-content>
+
+      <div class="form-group"  style="display: inline-block;padding:10px;padding-top:50px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Flightnumber</mat-label>
+            <input matInput placeholder="Placeholder" [(ngModel)]="flightDetails.flightNumber">
+         
+            <mat-hint>F12345</mat-hint>
+          </mat-form-field>
+      </div>
+      <div class="form-group" style="display: inline-block;padding:10px;">
+
+        <mat-form-field appearance="fill" style="display: inline-block">
+            <mat-label >Travel date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="flightDetails.travelDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+     </div>
+
+      <div class="form-group" style="display: inline-block">
+        <button mat-button (click)="searchFlight(flightDetails)" style="background:white;color:black;">Search Flight</button>
+      </div>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-actions>
+    <mat-card-footer>
+       
+                <mat-card *ngFor="let flights of data" class="example-card" style="border:none;box-shadow:none;background:transparent;">
+                    <mat-card-title>{{ flights.derpartureAirport.shortName }} {{ flights.departureTime | date: 'HH:mm' }} - {{ flights.arrivalAirport.shortName }} {{ flights.departureTime| date: 'HH:mm'  }}</mat-card-title>
+                    <mat-card-subtitle>
+<p style="display:inline-block;padding-right:10px;"> <mat-icon matSuffix>flight_takeoff</mat-icon> {{ flights.derpartureAirport.fullName }}({{ flights.derpartureAirport.shortName }}) Gate: {{ flights.departureGate }}</p>
+<p style="display:inline-block;padding:10px;"> <mat-icon matSuffix>arrow_right_alt</mat-icon> </p>
+<p style="display:inline-block;padding:10px;">  {{ flights.derpartureAirport.fullName }}({{ flights.derpartureAirport.shortName }}) Gate: {{ flights.arrivalGate }} <mat-icon matSuffix>flight_land</mat-icon> </p>       
+</mat-card-subtitle>
+</mat-card>
+
+    </mat-card-footer>
+  </mat-card>
+  </div>
+

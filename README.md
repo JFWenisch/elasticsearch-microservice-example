@@ -2,7 +2,7 @@
 ![Build](https://github.com/JFWenisch/flight-status-example/actions/workflows/ci.yml/badge.svg)
 ![image info](./docs/img/flight-status-frontend.png)
 
-The Flightstatus example is an application containing a lightweight java spring-boot microservice, elasticsearch and kibana to demonstrate a possible integration.
+The Flightstatus example is an application containing a lightweight java spring-boot microservice used as backend (REST Api), an angular frontend, elasticsearch and kibana to demonstrate a possible integration.
 
 ```mermaid
 stateDiagram-v2

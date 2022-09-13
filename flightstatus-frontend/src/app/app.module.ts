@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MaterialModule } from './material/material.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MaterialModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,25 +5,31 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { FlightStatusRequest } from './flight-status-request';
 import { FlightStatusResponse } from './flight-status-response';
-
+import { DatePipe } from '@angular/common'
 @Injectable({
   providedIn: 'root'
 })
 export class RestClientService {
 
   // Define API
-  apiURL = 'http://localhost:3000';
+  apiURL = 'http://localhost:8090';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,public datepipe: DatePipe) {}
 
-  searchFlight(request: FlightStatusRequest): Observable<any> {
+  searchFlight(request: any): Observable<any> {
+    //Transform date
+    console.log(request)
+    let newDate =this.datepipe.transform(request.travelDate, 'yyyy-MM-dd');
+    
+    request.travelDate=newDate;
+    console.log(request)
     return this.http
       .post<FlightStatusResponse>(
-        this.apiURL + '/employees',
+        this.apiURL ,
         JSON.stringify(request),
         this.httpOptions
       )

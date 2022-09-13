@@ -88,7 +88,7 @@ The endpoint returns an array of flights that matches the input.
 
 ## Further information
 ### General
-For example purposes the application will automatically create and return a random list of flights for the provided traveldate if the flightnumber matches `F12345`. All flights that are created this way are stored as document in elasticsearch indexed under `flights`.
+For example purposes the application will automatically create and return a random list of flights for the provided traveldate if the flightnumber matches `F12345`. All flights that are created this way are stored as document in elasticsearch indexed under `flights`. If the flightNumber starts with `F` but isn't matching `F12345` an empty list is returned with the HTTP Status 204 (No Content). If the flightNumber is not starting with `F`, the Backend will return an HTTP 400 (Bad Request) errorcode .
 
 All requested flights independent of the flightnumber are stored as document in elasticsearch and indexed under `requests`
 

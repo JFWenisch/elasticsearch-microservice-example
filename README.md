@@ -6,11 +6,12 @@ The Flightstatus example is an application containing a lightweight java spring-
 
 ```mermaid
 stateDiagram-v2
- [*] --> RESTClient
- RESTClient --> backend: flightStatusRequest
- backend --> elasticsearch: flightStatusRequest
+ [*] --> Frontend
+Frontend --> Backend: flightStatusRequest
+Backend --> Elasticsearch: flightStatusRequest
+Backend --> Frontend: flightStatusResponse
  [*] --> Kibana 
- Kibana --> elasticsearch
+ Kibana --> Elasticsearch
  
 ```
 ## Quickstart

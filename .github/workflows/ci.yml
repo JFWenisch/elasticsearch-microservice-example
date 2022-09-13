@@ -7,7 +7,6 @@ on:
   push:
     branches: 
       - "main" 
-      - feature/frontend
   pull_request:
     branches: [ "main" ]
 
@@ -61,6 +60,7 @@ jobs:
         push: true
         tags: |
           ghcr.io/jfwenisch/flightstatus-backend:${{needs.version.outputs.tag}}
+          ghcr.io/jfwenisch/flightstatus-backend:latest
         labels: ${{ steps.meta.outputs.labels }}
 
   frontend:
@@ -94,6 +94,7 @@ jobs:
         push: true
         tags: |
           ghcr.io/jfwenisch/flightstatus-frontend:${{needs.version.outputs.tag}}
+          ghcr.io/jfwenisch/flightstatus-frontend:latest
         labels: ${{ steps.meta.outputs.labels }}
 
   release:

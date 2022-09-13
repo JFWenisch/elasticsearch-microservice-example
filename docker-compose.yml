@@ -36,11 +36,19 @@ services:
   
   backend:
     container_name: backend
-    image: ghcr.io/jfwenisch/flight-status-example:main
+    image: ghcr.io/jfwenisch/flightstatus-backend:latest
     ports:
       - 8090:8090
     depends_on:
       - elasticsearch
+  
+  frontend:
+    container_name: frontend
+    image: ghcr.io/jfwenisch/flightstatus-frontend:latest
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
 
 volumes:
   elasticsearch-data:

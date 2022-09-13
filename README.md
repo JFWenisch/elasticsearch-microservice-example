@@ -1,6 +1,6 @@
 # Flightstatus Example
 ![Build](https://github.com/JFWenisch/flight-status-example/actions/workflows/ci.yml/badge.svg)
-![image info](./docs/img/flight-status-frontend.png)
+
 
 The Flightstatus example is an application containing a lightweight java spring-boot microservice used as backend (REST Api), an angular frontend, elasticsearch and kibana to demonstrate a possible integration.
 
@@ -24,8 +24,7 @@ Start the microservice, Elasticsearch and Kibana using Docker Compose:
 ```bash 
 docker-compose up -d
 ```
-
-Your Elasticsearch node will startup now, and after a couple of seconds, you can reach it at `http://localhost:9200/`, Kibana will be running at `http://localhost:5601` and the backend at `http://localhost:8090/`.
+After a couple of seconds, the elasticsearch instance can be reached  at `http://localhost:9200/`, Kibana will be running at `http://localhost:5601` the frontend at `http://localhost:8080/` and the backend at `http://localhost:8090/`.
 
 
 To shut down Elasticsearch and Kibana run:
@@ -39,14 +38,30 @@ docker-compose down -v
 ```
 
 ### Search for flight status
-The microsoervice provides and endpoint that requires a json containing the flightnumber and traveldate(`yyyy-MM-dd format`) as string.
+The microsoervice provides and endpoint that will return random flights for a given POST request. The backend always requires a travelDate and flightNumber to be provided.
+
+There are multiple ways on how to test this functionality: 
+<strong> Using the frontend</strong>
+Open the frontend by navigating to [http://localhost:8080/](http://localhost:8080) and enter a flightNumber (i.e. `F12345`) and choose a travelDate 
+![frontend](./docs/img/flight-status-frontend.png)
+
+<strong>Using Swagger UI</strong>
+
+Navigate to [http://localhost:8090/swagger-ui/index.html#/controller/process](http://localhost:8090/swagger-ui/index.html#/controller/process) and run the request with the provided sample data.
+
+![frontend](./docs/img/swagger-ui-sample.png)
+
+
+<strong> Using Curl </strong>
+
 ```bash
 curl --location --request POST 'localhost:8090' \
 --header 'Content-Type: application/json' \
 --data-raw '{ "flightNumber": "F12345", "travelDate": "2022-08-17" }'
 ```
+Hint: The travelDate needs to be provided as `yyyy-MM-dd` formatted  string.
 
-
+### Result
 The endpoint returns an array of flights that matches the input.
 ```JSON
 {

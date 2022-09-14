@@ -1,11 +1,13 @@
 version: '3.7'
 
 services:
-
+  
   # Elasticsearch Docker Images: https://www.docker.elastic.co/
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.4.1
     container_name: elasticsearch
+    networks:
+      - flightstatus-network
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -27,6 +29,8 @@ services:
   kibana:
     container_name: kibana
     image: docker.elastic.co/kibana/kibana:8.4.1
+    networks:
+      - flightstatus-network
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
@@ -34,9 +38,15 @@ services:
     depends_on:
       - elasticsearch
   
+
   backend:
     container_name: backend
     image: ghcr.io/jfwenisch/flightstatus-backend:latest
+    networks:
+      - flightstatus-network
+    environment:
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
     ports:
       - 8090:8090
     depends_on:
@@ -45,11 +55,16 @@ services:
   frontend:
     container_name: frontend
     image: ghcr.io/jfwenisch/flightstatus-frontend:latest
+    networks:
+      - flightstatus-network
     ports:
       - 8080:80
     depends_on:
       - backend
 
+
 volumes:
   elasticsearch-data:
     driver: local
+networks:
+  flightstatus-network: {}

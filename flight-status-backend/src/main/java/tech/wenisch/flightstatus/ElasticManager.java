@@ -23,7 +23,17 @@ public class ElasticManager {
 	private static Logger logger = LoggerFactory.getLogger(ElasticManager.class);
 
 	private ElasticManager() {
-		RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200)).build();
+		logger.info("Trying to read env variable ELASTICSEARCH_HOST and ELASTICSEARCH_PORT");
+		RestClient restClient;
+		if ((System.getenv("ELASTICSEARCH_HOST") != null && System.getenv("ELASTICSEARCH_HOST").length() != 0)
+				&& (System.getenv("ELASTICSEARCH_PORT") != null && System.getenv("ELASTICSEARCH_PORT").length() != 0)) {
+			logger.info("Found env variables. Establishing connection to elasticsearch on "+ System.getenv("ELASTICSEARCH_HOST")+":"+System.getenv("ELASTICSEARCH_PORT"));
+			restClient = RestClient.builder(new HttpHost(System.getenv("ELASTICSEARCH_HOST"),
+					Integer.parseInt(System.getenv("ELASTICSEARCH_PORT")))).build();
+		} else {
+			logger.warn("Couldn't read env variable ELASTICSEARCH_HOST. Defaulting to localhost:9200");
+			restClient = RestClient.builder(new HttpHost("localhost", 9200)).build();
+		}
 		ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
 		elasticClient = new ElasticsearchClient(transport);
 	}

@@ -21,7 +21,7 @@ services:
     cap_add:
       - IPC_LOCK
     volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
+      - ./config/elasticsearch:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
       - 9300:9300
@@ -62,9 +62,5 @@ services:
     depends_on:
       - backend
 
-
-volumes:
-  elasticsearch-data:
-    driver: local
 networks:
   flightstatus-network: {}

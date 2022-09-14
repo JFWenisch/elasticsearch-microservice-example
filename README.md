@@ -92,8 +92,11 @@ The endpoint returns an array of flights that matches the input.
 ### General
 For example purposes the application will automatically create and return a random list of flights for the provided traveldate if the flightnumber matches `F12345`. All flights that are created this way are stored as document in elasticsearch indexed under `flights`. If the flightNumber starts with `F` but isn't matching `F12345` an empty list is returned with the HTTP Status 204 (No Content). If the flightNumber is not starting with `F`, the Backend will return an HTTP 400 (Bad Request) errorcode .
 
-All requested flights independent of the flightnumber are stored as document in elasticsearch and indexed under `requests`
+### Monitoring
+All requested flights independent of the flightnumber are stored as document in elasticsearch and indexed under `requests`. A simple dashboard visualizing the most searched flights can be opened by navigating to 
+[http://localhost:5601/app/dashboards#/view/46077ec0-3414-11ed-ac8e-d7cce4115039?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))](http://localhost:5601/app/dashboards#/view/46077ec0-3414-11ed-ac8e-d7cce4115039?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now)))
 
+![frontend](./docs/img/sample-dashboard.png)
 
 ### Usage with Eureka Server
 The Application can register itself with an Eureka Server instance for service discovery. To do so, set the environment variable `EUREKA_URL`.

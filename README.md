@@ -23,6 +23,7 @@ The docker image for the backend is built and pushed to the github container reg
 
 Start the microservice, Elasticsearch and Kibana using Docker Compose:
 ```bash 
+docker-compose pull
 docker-compose up -d
 ```
 After a couple of seconds, the elasticsearch instance can be reached  at `http://localhost:9200/`, Kibana will be running at `http://localhost:5601` the frontend at `http://localhost:8080/` and the backend at `http://localhost:8090/`.

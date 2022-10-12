@@ -5,6 +5,7 @@
 
 The Flightstatus example is an application containing a lightweight java spring-boot microservice used as backend (REST Api), an angular frontend, elasticsearch and kibana to demonstrate a possible integration.
 
+
 ```mermaid
 stateDiagram-v2
  [*] --> Frontend
